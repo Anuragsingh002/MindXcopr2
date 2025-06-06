@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindxcope - Think Beyond Resumes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f0f4f8;
+      color: #222;
+    }
+
+    header {
+      background: #0b3d91;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713') no-repeat center center/cover;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    .section {
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .section h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .feature {
+      width: 300px;
+      background: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background: #0b3d91;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Mindxcope</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>Think Beyond Resumes</h2>
+      <p>AI-powered cognitive hiring using brain-computer interfaces and behavioral insights.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h3>About Mindxcope</h3>
+    <p>
+      Mindxcope is an innovative AI-driven platform that analyzes cognitive signals like typing behavior, brain activity (EEG), and stress metrics to evaluate focus, creativity, and decision-making ability — enabling companies to hire smarter.
+    </p>
+  </section>
+
+  <section id="features" class="section">
+    <h3>Core Features</h3>
+    <div class="features">
+      <div class="feature">
+        <h4>EEG-Based Focus Detection</h4>
+        <p>Analyze brainwave patterns to measure cognitive attention in real-time.</p>
+      </div>
+      <div class="feature">
+        <h4>Typing & Browsing Behavior</h4>
+        <p>Track subtle behavioral patterns that reflect stress, fatigue, and creativity.</p>
+      </div>
+      <div class="feature">
+        <h4>AI-Powered Insights</h4>
+        <p>Get predictive hiring recommendations based on cognitive data, not just resumes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h3>Contact Us</h3>
+    <p>Email: contact@mindxcope.com | Phone: +91 99999 99999</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Mindxcope. All Rights Reserved.
+  </footer>
+
+</body>
+
+</html>
