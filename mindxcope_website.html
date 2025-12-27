@@ -6,12 +6,12 @@
     <meta name="description" content="Mindxcope: Decoding Human Cognition with AI & Neuroscience. The world's first hybrid BCI and behavioral biometrics platform.">
     <title>Mindxcope | Cognitive Intelligence Platform</title>
 
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="[https://unpkg.com/react@18/umd/react.development.js](https://unpkg.com/react@18/umd/react.development.js)"></script>
+    <script crossorigin src="[https://unpkg.com/react-dom@18/umd/react-dom.development.js](https://unpkg.com/react-dom@18/umd/react-dom.development.js)"></script>
     
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="[https://unpkg.com/@babel/standalone/babel.min.js](https://unpkg.com/@babel/standalone/babel.min.js)"></script>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -33,11 +33,13 @@
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                         mono:,
+                        display: ['Orbitron', 'sans-serif'] // Futuristic Header Font
                     },
                     animation: {
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'scan': 'scan 3s linear infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -47,6 +49,10 @@
                         scan: {
                             '0%': { transform: 'translateY(-100%)' },
                             '100%': { transform: 'translateY(100%)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
@@ -54,9 +60,9 @@
         }
     </script>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap)" rel="stylesheet">
 
     <style>
         body { 
@@ -88,7 +94,7 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; rounded: 4px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
     </style>
 </head>
@@ -97,11 +103,16 @@
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
-        const { 
-            Activity, Brain, Cpu, Database, Fingerprint, Network, 
-            Shield, Zap, Menu, X, ArrowRight, Layers, Eye, Code, 
-            BarChart3, Globe, Lock, GraduationCap 
-        } = lucide;
+
+        // --- ICON WRAPPER COMPONENT ---
+        // Handles Lucide icons in a standalone environment
+        const Icon = ({ name, size = 24, className }) => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, [name]); // Re-run when icon name changes
+
+            return <i data-lucide={name} width={size} height={size} className={className}></i>;
+        };
 
         // --- 1. NAVIGATION COMPONENT ---
         const Navbar = () => {
@@ -123,10 +134,10 @@
                             {/* Logo */}
                             <div className="flex items-center gap-2 cursor-pointer group">
                                 <div className="relative">
-                                    <Brain className="h-8 w-8 text-mind-primary group-hover:animate-pulse" />
+                                    <Icon name="brain-circuit" className="text-mind-primary group-hover:animate-pulse" size={32} />
                                     <div className="absolute inset-0 bg-mind-primary blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                                 </div>
-                                <span className="text-xl font-bold tracking-tighter text-white">MIND<span className="text-mind-primary">X</span>COPE</span>
+                                <span className="text-xl font-display font-bold tracking-widest text-white">MIND<span className="text-mind-primary">X</span>COPE</span>
                             </div>
                             
                             {/* Desktop Menu */}
@@ -145,14 +156,16 @@
                             <div className="hidden lg:block">
                                 <button className="bg-white/5 hover:bg-mind-primary/10 hover:text-mind-primary border border-white/10 hover:border-mind-primary/50 px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 group shadow-lg shadow-black/50">
                                     <span>Dev API</span>
-                                    <Code size={14} className="group-hover:rotate-90 transition-transform" />
+                                    <span className="group-hover:rotate-90 transition-transform block">
+                                        <Icon name="code" size={14} />
+                                    </span>
                                 </button>
                             </div>
                             
                             {/* Mobile Toggle */}
                             <div className="-mr-2 flex lg:hidden">
                                 <button onClick={() => setIsOpen(!isOpen)} className="text-gray-400 hover:text-white p-2">
-                                    {isOpen? <X /> : <Menu />}
+                                    <Icon name={isOpen? "x" : "menu"} />
                                 </button>
                             </div>
                         </div>
@@ -160,7 +173,7 @@
                     
                     {/* Mobile Menu */}
                     {isOpen && (
-                        <div className="lg:hidden bg-mind-card border-b border-white/5 animate-fade-in-down">
+                        <div className="lg:hidden bg-mind-card border-b border-white/5 animate-fade-in">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 {navLinks.map((link) => (
                                     <a key={link.name} href={link.href} 
@@ -195,7 +208,7 @@
                         </div>
 
                         {/* Main Headline */}
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-tight">
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight mb-8 leading-tight">
                             Decoding Human <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-mind-primary via-white to-mind-secondary neon-text">
                                 Cognition
@@ -213,22 +226,21 @@
                             <button className="group relative px-8 py-4 bg-mind-primary text-black font-bold rounded-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] flex items-center justify-center gap-3 overflow-hidden">
                                 <div className="absolute inset-0 w-full h-full bg-white/30 group-hover:translate-x-full transition-transform duration-500 ease-out -skew-x-12 -ml-4"></div>
                                 <span className="relative">Join the Revolution</span>
-                                <Zap size={18} className="relative group-hover:text-mind-accent transition-colors" />
+                                <Icon name="zap" size={18} className="relative group-hover:text-mind-accent transition-colors" />
                             </button>
                             
                             <button className="px-8 py-4 bg-transparent border border-white/20 hover:border-mind-secondary hover:text-mind-secondary text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-3 backdrop-blur-sm">
                                 Explore Technology
-                                <ArrowRight size={18} />
+                                <Icon name="arrow-right" size={18} />
                             </button>
                         </div>
 
                         {/* Social Proof / Trust Indicators */}
                         <div className="mt-16 pt-8 border-t border-white/5">
                             <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Trusted by researchers at</p>
-                            <div className="flex justify-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                                {/* Placeholder Logos using text for demo */}
+                            <div className="flex justify-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500 flex-wrap">
                                 {.map(name => (
-                                    <span key={name} className="text-sm font-bold">{name}</span>
+                                    <span key={name} className="text-sm font-bold font-display px-4">{name}</span>
                                 ))}
                             </div>
                         </div>
@@ -248,9 +260,10 @@
                 
                 // Set canvas size
                 const resize = () => {
-                    const parent = canvas.parentElement;
-                    canvas.width = parent.offsetWidth;
-                    canvas.height = 350;
+                    if(canvas.parentElement) {
+                        canvas.width = canvas.parentElement.offsetWidth;
+                        canvas.height = 350;
+                    }
                 };
                 window.addEventListener('resize', resize);
                 resize();
@@ -306,20 +319,20 @@
             },);
 
             return (
-                <div className="w-full glass-panel rounded-2xl overflow-hidden border border-mind-primary/20 shadow-2xl relative group">
+                <div className="w-full glass-panel rounded-2xl overflow-hidden border border-mind-primary/20 shadow-2xl relative group h-[350px]">
                     {/* Header */}
                     <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent z-10">
                         <div className="flex gap-4">
                             <div className="flex flex-col">
                                 <span className="text-[10px] uppercase text-gray-500 font-mono tracking-wider">Acquisition</span>
                                 <span className="text-xs font-bold text-mind-primary flex items-center gap-2">
-                                    <Activity size={12}/> LIVE STREAM: 500Hz
+                                    <Icon name="activity" size={12}/> LIVE STREAM: 500Hz
                                 </span>
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-[10px] uppercase text-gray-500 font-mono tracking-wider">Classification</span>
                                 <span className="text-xs font-bold text-mind-secondary flex items-center gap-2">
-                                    <Brain size={12}/> FLOW STATE DETECTED (92%)
+                                    <Icon name="brain-circuit" size={12}/> FLOW STATE DETECTED (92%)
                                 </span>
                             </div>
                         </div>
@@ -330,7 +343,7 @@
                     </div>
                     
                     {/* Canvas */}
-                    <canvas ref={canvasRef} className="w-full h-[350px] opacity-80 group-hover:opacity-100 transition-opacity duration-500"></canvas>
+                    <canvas ref={canvasRef} className="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500"></canvas>
                     
                     {/* Scanning Line Overlay */}
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-mind-primary/5 to-transparent h-[20%] w-full animate-scan opacity-30"></div>
@@ -345,9 +358,9 @@
             return (
                 <section id="technology" className="py-24 bg-mind-base relative">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 items-center">
                             <div>
-                                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                                <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
                                     <span className="text-mind-primary">Technology</span> Stack
                                 </h2>
                                 <p className="text-gray-400 text-lg leading-relaxed mb-8">
@@ -374,9 +387,11 @@
                             {features.map((f, i) => (
                                 <div key={i} className="glass-panel p-8 rounded-xl hover:border-mind-primary/50 transition-all duration-300 group relative overflow-hidden">
                                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                        <Cpu size={64} />
+                                        <Icon name="cpu" size={64} />
                                     </div>
-                                    <div className="mb-6 text-mind-primary group-hover:scale-110 group-hover:text-white transition-all duration-300">{f.icon}</div>
+                                    <div className="mb-6 text-mind-primary group-hover:scale-110 group-hover:text-white transition-all duration-300">
+                                        <Icon name={f.icon} size={32} />
+                                    </div>
                                     <h3 className="text-xl font-bold mb-3 text-white">{f.title}</h3>
                                     <p className="text-sm text-gray-400 leading-relaxed mb-4">{f.desc}</p>
                                     <div className="inline-block px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-mind-secondary border border-mind-secondary/20">
@@ -395,16 +410,11 @@
             const = useState(0);
             const cases =;
 
-            // Helper Icons
-            function BriefcaseIcon() { return <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400"><GraduationCap /></div> }
-            function ZapIcon() { return <div className="p-2 bg-yellow-500/20 rounded-lg text-yellow-400"><Zap /></div> }
-            function MicroscopeIcon() { return <div className="p-2 bg-green-500/20 rounded-lg text-green-400"><Database /></div> }
-
             return (
                 <section id="use-cases" className="py-24 bg-mind-surface">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold mb-4">Applications & Impact</h2>
+                            <h2 className="text-4xl font-display font-bold mb-4">Applications & Impact</h2>
                             <p className="text-gray-400">From the laboratory to the boardroom.</p>
                         </div>
 
@@ -415,14 +425,16 @@
                                     <button 
                                         key={i}
                                         onClick={() => setActiveTab(i)}
-                                        className={`p-6 text-left rounded-xl transition-all duration-300 border ${
+                                        className={`p-6 text-left rounded-xl transition-all duration-300 border group ${
                                             activeTab === i 
                                            ? 'bg-mind-card border-mind-primary shadow-[0_0_20px_rgba(0,240,255,0.1)]' 
                                             : 'bg-transparent border-transparent hover:bg-white/5'
                                         }`}
                                     >
                                         <div className="flex items-center gap-4">
-                                            {c.icon}
+                                            <div className={`p-2 rounded-lg ${activeTab === i? 'bg-mind-primary/20 text-mind-primary' : 'bg-white/5 text-gray-500'}`}>
+                                                <Icon name={c.icon} size={24} />
+                                            </div>
                                             <span className={`text-lg font-bold ${activeTab === i? 'text-white' : 'text-gray-500'}`}>{c.title}</span>
                                         </div>
                                     </button>
@@ -430,17 +442,17 @@
                             </div>
 
                             {/* Content Area */}
-                            <div className="lg:w-2/3 bg-mind-card border border-white/5 rounded-2xl p-8 lg:p-12 relative overflow-hidden">
+                            <div className="lg:w-2/3 bg-mind-card border border-white/5 rounded-2xl p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center min-h-[400px]">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-mind-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
                                 
-                                <div className="relative z-10 animate-fade-in">
-                                    <h3 className="text-3xl font-bold text-white mb-6">{cases.title}</h3>
+                                <div className="relative z-10 animate-fade-in key={activeTab}">
+                                    <h3 className="text-3xl font-display font-bold text-white mb-6">{cases.title}</h3>
                                     <p className="text-xl text-gray-300 leading-relaxed mb-8 font-light">
                                         {cases.content}
                                     </p>
                                     
                                     <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 rounded-lg border border-white/10">
-                                        <BarChart3 className="text-mind-secondary" />
+                                        <Icon name="bar-chart-3" className="text-mind-secondary" />
                                         <span className="font-mono text-mind-secondary font-bold">{cases.stat}</span>
                                     </div>
                                 </div>
@@ -463,7 +475,7 @@
                         <div className="mb-24 bg-gradient-to-r from-mind-card to-mind-base border border-white/10 rounded-2xl p-8 lg:p-12 flex flex-col md:flex-row items-center gap-12">
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <Lock className="text-mind-secondary" />
+                                    <Icon name="lock" className="text-mind-secondary" />
                                     <h3 className="text-2xl font-bold text-white">Ethics & Privacy First</h3>
                                 </div>
                                 <p className="text-gray-400 leading-relaxed">
@@ -481,7 +493,7 @@
 
                         {/* Roadmap Timeline */}
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl font-bold">Strategic Roadmap</h2>
+                            <h2 className="text-3xl font-display font-bold">Strategic Roadmap</h2>
                             <p className="text-gray-500 font-mono text-sm mt-2">VISION 2030</p>
                         </div>
 
@@ -512,7 +524,7 @@
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                             <div className="col-span-1 md:col-span-2">
                                 <div className="flex items-center gap-2 mb-4">
-                                    <Brain className="h-6 w-6 text-gray-500" />
+                                    <Icon name="brain-circuit" className="h-6 w-6 text-gray-500" />
                                     <span className="text-lg font-bold text-gray-500">MINDXCOPE</span>
                                 </div>
                                 <p className="text-gray-600 max-w-sm">
@@ -551,10 +563,6 @@
 
         // --- MAIN APP COMPONENT ---
         const App = () => {
-            useEffect(() => {
-                lucide.createIcons();
-            },);
-
             return (
                 <div className="min-h-screen bg-mind-base text-mind-text selection:bg-mind-primary selection:text-black">
                     <Navbar />
